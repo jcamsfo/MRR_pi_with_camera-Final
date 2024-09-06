@@ -183,7 +183,7 @@ void Sequencer(const bool Image_Motion, const cv::Mat &gray_frame_local)
 {
     static std::time_t currentTime = std::time(nullptr);
     static std::tm *localTime = std::localtime(&currentTime);
-    static unsigned long last_image_stored = 0;
+    static unsigned long last_image_stored = currentTime;
     static unsigned long time_since_last_iage_stored = 0;
     std::string nextFileName;
 
@@ -193,7 +193,7 @@ void Sequencer(const bool Image_Motion, const cv::Mat &gray_frame_local)
 
     currentTime = std::time(nullptr);
     time_since_last_iage_stored = currentTime - last_image_stored;
-    if ((time_since_last_iage_stored > 10) && Image_Motion)
+    if ((time_since_last_iage_stored > 600) && Image_Motion)   //  in seconds 10 minutes
     {
         last_image_stored = currentTime;
 
@@ -209,7 +209,8 @@ void Sequencer(const bool Image_Motion, const cv::Mat &gray_frame_local)
 
         std::chrono::duration<double> elapsed_seconds = loopEndTime - loopStartTime;
         // std::cout << "Loop duration: " << elapsed_seconds.count() << "s\n";
-
+        std::cout << std::endl;
         std::cout << "WRITING next filename " << nextFileName << "  time  " << elapsed_seconds.count() << std::endl;
+        std::cout << std::endl;        
     }
 }

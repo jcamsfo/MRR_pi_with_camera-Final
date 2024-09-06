@@ -12,6 +12,7 @@
 #include <string>
 #include <ctime>
 #include <deque>
+#include <filesystem> // C++17 for directory operations
 
 
 // #include <unistd.h>
@@ -29,6 +30,10 @@
 #include "camera_grab.h"
 #include "file_io.h"
 #include "client_params.h"
+
+
+
+namespace fs = std::filesystem;
 
 void usage()
 {
@@ -241,6 +246,32 @@ void createSliders(const string &windowName, int numSliders)
 
 
 
+
+std::string get_random_file(const std::string& dir_path) {
+    std::vector<std::string> files;
+
+    // Read the directory and collect file names
+    for (const auto& entry : fs::directory_iterator(dir_path)) {
+        if (fs::is_regular_file(entry.status())) {
+            files.push_back(entry.path().string());
+        }
+    }
+
+    if (files.empty()) {
+        return "";  // Return an empty string if no files are found
+    }
+
+    // Seed the random number generator
+    std::srand(std::time(nullptr));
+
+    // Select a random index from the list of files
+    int random_index = std::rand() % files.size();
+    return files[random_index];
+}
+
+
+
+
 int main(int argc, char *argv[])
 {
 
@@ -285,6 +316,21 @@ int main(int argc, char *argv[])
 
 
 
+
+//     std::string dir_path = "../tif";  // Replace with your directory
+//     ProcessStartTime = std::chrono::steady_clock::now();
+//     std::string random_file = get_random_file(dir_path);
+//     ProcessEndTime = std::chrono::steady_clock::now();
+//     ProcessTime = ProcessEndTime - ProcessStartTime;
+//      std::cout << "ProcessTime: " << ProcessTime.count() << std::endl;
+//       std::cout << "Randomly selected file: " << random_file << std::endl;
+
+    
+
+//  exit(0);
+
+
+
     // std::string imageFile = "../../images/image.jpg"; // Path to your image file
     // cv::Mat img = loadImage(imageFile);
 
@@ -323,7 +369,12 @@ int main(int argc, char *argv[])
                       "-i", Pi_Params.i3, "-p", Pi_Params.p3,
               "-i", Pi_Params.i4, "-p", Pi_Params.p4 };
 
-    int total_args = 21;
+
+        // std::string connections[] = {"x", "-i", Pi_Params.i0, "-p", Pi_Params.p0 };
+
+            //  std::string connections[5] = {"x", "-i", "127.0.0.1", "-p", "5569"};
+
+    int total_args = 5; // 21;
 
     char *argv_file[total_args];
 
@@ -427,9 +478,15 @@ int main(int argc, char *argv[])
                 string_stream.write(reinterpret_cast<const char *>(gray_frame.data), gray_frame.total() * gray_frame.elemSize());
             }
             else
-            {
-                cv::Mat image_read = cv::imread("../tif/000004.tif", cv::IMREAD_UNCHANGED);
+            {   
+                std::string dir_path = "../tif";  
+                std::string random_file = get_random_file(dir_path);
+                cv::Mat image_read = cv::imread(random_file, cv::IMREAD_UNCHANGED);
                 string_stream.write(reinterpret_cast<const char *>(image_read.data), image_read.total() * image_read.elemSize());
+                cout << endl;                
+                cout << "Reading: File: " << random_file << endl;
+                cout << endl;
+
             }
 
             // put the latest into a a deque so the most recent is always 1st
