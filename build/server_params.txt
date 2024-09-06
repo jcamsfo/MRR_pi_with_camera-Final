@@ -1,11 +1,22 @@
 Scrn_H 1024
 Scrn_V 768
-Noise_Gn 50
-In_Gn 90
+Noise_Gn 0
+In_Gn 100
 Out_Gn 100
 Gma_Gn 0 
 Cycle_Tme 70
 Fade_Tme 30
+Full_Screen_Enable 0
+
+---------
+
+Scrn_H 1024
+Scrn_V 768
+Noise_Gn 20
+In_Gn 85
+Out_Gn 100
+Gma_Gn 20
+Cycle_Tme 70
 Fade_Tme 30
 Full_Screen_Enable 1
 
@@ -13,10 +24,10 @@ Full_Screen_Enable 1
 
 Scrn_H 1024
 Scrn_V 768
-Noise_Gn 0
+Noise_Gn 36
 In_Gn 100
-Out_Gn 100
-Gma_Gn 50
+Out_Gn 90
+Gma_Gn 70
 Cycle_Tme 70
 Fade_Tme 30
 Full_Screen_Enable 1
@@ -25,36 +36,24 @@ Full_Screen_Enable 1
 
 Scrn_H 1024
 Scrn_V 768
-Noise_Gn 50
-In_Gn 100
-Out_Gn 100
-Gma_Gn 100 
+Noise_Gn 52
+In_Gn 70
+Out_Gn 140
+Gma_Gn 85
 Cycle_Tme 70
-Fade_Tme 20
+Fade_Tme 30
 Full_Screen_Enable 1
 
 ---------
 
 Scrn_H 1024
 Scrn_V 768
-Noise_Gn 20
-In_Gn 100
-Out_Gn 100
-Gma_Gn 100 
+Noise_Gn 90
+In_Gn 40
+Out_Gn 120
+Gma_Gn 100
 Cycle_Tme 70
-Fade_Tme 10
-Full_Screen_Enable 1
-
----------
-
-Scrn_H 1024
-Scrn_V 768
-Noise_Gn 20
-In_Gn 100
-Out_Gn 100
-Gma_Gn 100 
-Cycle_Tme 70
-Fade_Tme 5
+Fade_Tme 30
 Full_Screen_Enable 1
 
 

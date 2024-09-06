@@ -317,18 +317,24 @@ int main(int argc, char *argv[])
 
     // std::string connections[] = {"x", "-i", Pi_Params.i0, "-p", Pi_Params.p0, "-i", Pi_Params.i2, "-p", Pi_Params.p2};
 
-    std::string connections[] = {"x", "-i", Pi_Params.i0, "-p", Pi_Params.p0};
+    std::string connections[] = {"x", "-i", Pi_Params.i0, "-p", Pi_Params.p0,
+        "-i", Pi_Params.i1, "-p", Pi_Params.p1,
+        "-i", Pi_Params.i2, "-p", Pi_Params.p2,
+                      "-i", Pi_Params.i3, "-p", Pi_Params.p3,
+              "-i", Pi_Params.i4, "-p", Pi_Params.p4 };
 
-    char *argv_file[13];
+    int total_args = 21;
 
-    for (int i = 0; i < 13; i++)
+    char *argv_file[total_args];
+
+    for (int i = 0; i < total_args; i++)
     {
         argv_file[i] = new char[connections[i].length() + 1];
         strcpy(argv_file[i], connections[i].c_str());
     }
-    int argc_file = 13; // sizeof(connections);
+    int argc_file = total_args; // sizeof(connections);
 
-    for (int i = 0; i < 13; i++)
+    for (int i = 0; i < total_args; i++)
     {
         std::cout << "argc XX: " << argv_file[i] << endl;
     }
@@ -415,14 +421,14 @@ int main(int argc, char *argv[])
         {
 
             randomValue = std::rand() % 100;
-            if (randomValue < 50)
+            if (randomValue < 80)
             {
                 //  convert binary mage to string image
                 string_stream.write(reinterpret_cast<const char *>(gray_frame.data), gray_frame.total() * gray_frame.elemSize());
             }
             else
             {
-                cv::Mat image_read = cv::imread("../tif/000106.tif", cv::IMREAD_UNCHANGED);
+                cv::Mat image_read = cv::imread("../tif/000004.tif", cv::IMREAD_UNCHANGED);
                 string_stream.write(reinterpret_cast<const char *>(image_read.data), image_read.total() * image_read.elemSize());
             }
 
